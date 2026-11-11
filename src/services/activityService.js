@@ -3,7 +3,14 @@
 
 
 
-const API_URL = 'http://localhost:5000/api/activities';
+const BACKEND_BASE = (
+  import.meta.env.VITE_API_URL ||
+  'https://green-campus-backend-gacz.onrender.com'
+).replace(/\/+$/, '');
+
+const API_URL = BACKEND_BASE.endsWith('/api')
+  ? `${BACKEND_BASE}/activities`
+  : `${BACKEND_BASE}/api/activities`;
 
 // Common helper for API requests
 const apiRequest = async (url, options = {}) => {
